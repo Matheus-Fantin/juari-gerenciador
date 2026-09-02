@@ -29,6 +29,7 @@
                 <li><a href="{{ route('dashboard') }}" class="hover:text-cream transition {{ request()->routeIs('dashboard') ? 'text-cream font-medium' : '' }}">Painel</a></li>
                 <li><a href="{{ route('testimonials.index') }}" class="hover:text-cream transition {{ request()->routeIs('testimonials.*') ? 'text-cream font-medium' : '' }}">Depoimentos</a></li>
                 <li><a href="{{ route('galleries.index') }}" class="hover:text-cream transition {{ request()->routeIs('galleries.*') ? 'text-cream font-medium' : '' }}">Galeria</a></li>
+                <li><a href="{{ route('site-images.index') }}" class="hover:text-cream transition {{ request()->routeIs('site-images.*') ? 'text-cream font-medium' : '' }}">Imagens do site</a></li>
                 @if (config('services.juari_site.public_url'))
                     <li><a href="{{ config('services.juari_site.public_url') }}" target="_blank" rel="noopener" class="hover:text-cream transition">Ver site ↗</a></li>
                 @endif

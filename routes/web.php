@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SiteImageController;
 use App\Http\Controllers\TestimonialController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/galeria', [GalleryController::class, 'index'])->name('galleries.index');
     Route::post('/galeria', [GalleryController::class, 'store'])->name('galleries.store');
+    Route::patch('/galeria/{photo}/legenda', [GalleryController::class, 'updateCaption'])->name('galleries.legenda');
+    Route::patch('/galeria/{photo}/mover', [GalleryController::class, 'move'])->name('galleries.mover');
     Route::delete('/galeria/{photo}', [GalleryController::class, 'destroy'])->name('galleries.destroy');
+
+    Route::get('/imagens-do-site', [SiteImageController::class, 'index'])->name('site-images.index');
+    Route::post('/imagens-do-site/{slot}', [SiteImageController::class, 'update'])->name('site-images.update');
 });
 
 Route::middleware('auth')->group(function () {

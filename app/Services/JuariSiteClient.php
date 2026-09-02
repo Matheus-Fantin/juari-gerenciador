@@ -42,11 +42,11 @@ class JuariSiteClient
         return $this->http()->get('/galleries')->throw()->json('data', []);
     }
 
-    public function uploadPhoto(int $galleryId, UploadedFile $file): array
+    public function uploadPhoto(int $galleryId, UploadedFile $file, ?string $legenda = null): array
     {
         $response = $this->http()
             ->attach('foto', file_get_contents($file->getRealPath()), $file->getClientOriginalName())
-            ->post("/galleries/{$galleryId}/photos");
+            ->post("/galleries/{$galleryId}/photos", array_filter(['legenda' => $legenda]));
 
         if ($response->status() === 422) {
             throw new \RuntimeException($response->json('errors.foto.0', 'Não foi possível enviar a foto.'));
@@ -55,9 +55,43 @@ class JuariSiteClient
         return $response->throw()->json('data', []);
     }
 
+    public function updatePhotoCaption(int $photoId, ?string $legenda): void
+    {
+        $response = $this->http()->patch("/photos/{$photoId}", ['legenda' => $legenda]);
+
+        if ($response->status() === 422) {
+            throw new \RuntimeException($response->json('errors.legenda.0', 'Não foi possível salvar a legenda.'));
+        }
+
+        $response->throw();
+    }
+
+    public function movePhoto(int $photoId, string $direcao): void
+    {
+        $this->http()->patch("/photos/{$photoId}/mover", ['direcao' => $direcao])->throw();
+    }
+
     public function deletePhoto(int $photoId): void
     {
         $this->http()->delete("/photos/{$photoId}")->throw();
+    }
+
+    public function siteImages(): array
+    {
+        return $this->http()->get('/site-images')->throw()->json('data', []);
+    }
+
+    public function updateSiteImage(string $slot, UploadedFile $file): array
+    {
+        $response = $this->http()
+            ->attach('imagem', file_get_contents($file->getRealPath()), $file->getClientOriginalName())
+            ->post("/site-images/{$slot}");
+
+        if ($response->status() === 422) {
+            throw new \RuntimeException($response->json('errors.imagem.0', 'Não foi possível enviar a imagem.'));
+        }
+
+        return $response->throw()->json('data', []);
     }
 
     /**

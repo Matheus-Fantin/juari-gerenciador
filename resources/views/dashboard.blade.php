@@ -11,7 +11,7 @@
         </div>
     @endunless
 
-    <div class="grid gap-6 sm:grid-cols-2">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <a href="{{ route('testimonials.index') }}"
            class="rounded-xl border border-graphite/10 bg-white p-6 hover:border-terracotta hover:shadow-sm transition">
             <p class="font-sans font-semibold text-xs tracking-[3px] text-terracotta uppercase mb-2">Depoimentos</p>
@@ -22,8 +22,15 @@
         <a href="{{ route('galleries.index') }}"
            class="rounded-xl border border-graphite/10 bg-white p-6 hover:border-terracotta hover:shadow-sm transition">
             <p class="font-sans font-semibold text-xs tracking-[3px] text-terracotta uppercase mb-2">Galeria</p>
-            <h2 class="font-display font-bold text-lg text-graphite mb-1">Adicionar ou excluir fotos</h2>
+            <h2 class="font-display font-bold text-lg text-graphite mb-1">Adicionar, legendar e ordenar fotos</h2>
             <p class="text-sm text-graphite/60">{{ $totalFotos }} foto(s) publicadas no site.</p>
+        </a>
+
+        <a href="{{ route('site-images.index') }}"
+           class="rounded-xl border border-graphite/10 bg-white p-6 hover:border-terracotta hover:shadow-sm transition">
+            <p class="font-sans font-semibold text-xs tracking-[3px] text-terracotta uppercase mb-2">Imagens do site</p>
+            <h2 class="font-display font-bold text-lg text-graphite mb-1">Trocar as capas do site</h2>
+            <p class="text-sm text-graphite/60">Capa da home, da galeria e as fotos da página Sobre.</p>
         </a>
     </div>
 </x-app-layout>
