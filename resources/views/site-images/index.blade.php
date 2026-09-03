@@ -15,7 +15,7 @@
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         @foreach ($imagens as $imagem)
             <section class="rounded-xl border border-graphite/10 bg-white p-5">
-                <div class="aspect-video rounded-md overflow-hidden bg-graphite-light/10 mb-4">
+                <div class="rounded-md overflow-hidden bg-graphite-light/10 mb-4" style="aspect-ratio: {{ str_replace(':', ' / ', $imagem['proporcao'] ?? '16:9') }};">
                     @if ($imagem['url'])
                         <img src="{{ $imagem['url'] }}" alt="" class="w-full h-full object-cover">
                     @else
@@ -24,7 +24,10 @@
                 </div>
 
                 <h2 class="font-display font-bold text-base text-graphite mb-1">{{ $imagem['label'] }}</h2>
-                <p class="text-xs text-graphite/50 mb-4">{{ $imagem['definida'] ? 'Definida pelo painel' : 'Usando imagem padrão do site' }}</p>
+                <p class="text-xs text-graphite/50 mb-2">{{ $imagem['definida'] ? 'Definida pelo painel' : 'Usando imagem padrão do site' }}</p>
+                @if (!empty($imagem['dica']))
+                    <p class="text-xs text-graphite/40 mb-4">📐 {{ $imagem['dica'] }}</p>
+                @endif
 
                 <form method="POST" action="{{ route('site-images.update', $imagem['slot']) }}" enctype="multipart/form-data" class="flex flex-wrap items-center gap-3">
                     @csrf

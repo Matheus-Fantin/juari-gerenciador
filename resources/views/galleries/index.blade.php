@@ -28,7 +28,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-5">
                             @forelse ($gallery['photos'] as $index => $photo)
                                 <div class="relative group rounded-md overflow-hidden border border-graphite/10">
-                                    <div class="relative aspect-square bg-graphite-light/10">
+                                    <div class="relative aspect-video bg-graphite-light/10">
                                         <img src="{{ $photo['url'] }}" alt="" class="w-full h-full object-cover">
                                         <form method="POST" action="{{ route('galleries.destroy', $photo['id']) }}"
                                               onsubmit="return confirm('Excluir esta foto?');"
@@ -74,6 +74,7 @@
                                    class="text-sm rounded-md border-graphite/15 focus:border-terracotta focus:ring-terracotta flex-1 min-w-[160px]">
                             <button type="submit" class="text-xs font-medium rounded-md bg-terracotta text-cream px-4 py-2 hover:bg-terracotta-dark transition">Adicionar foto</button>
                         </form>
+                        <p class="text-xs text-graphite/40 mt-2">📐 Ideal: foto horizontal (formato 16:9, ex: 1200×675px) com o assunto principal centralizado — assim ela não fica cortada no site.</p>
                     </section>
                 @endforeach
             </div>
