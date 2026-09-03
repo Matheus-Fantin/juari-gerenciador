@@ -53,11 +53,14 @@
                                         </div>
                                     </div>
 
-                                    <form method="POST" action="{{ route('galleries.legenda', $photo['id']) }}" class="flex items-center gap-1.5 p-1.5 bg-white">
+                                    <form method="POST" action="{{ route('galleries.legenda', $photo['id']) }}" class="p-2.5 bg-graphite/[0.03] border-t border-graphite/10">
                                         @csrf @method('PATCH')
-                                        <input type="text" name="legenda" value="{{ $photo['legenda'] }}" placeholder="Legenda (opcional)"
-                                               class="flex-1 min-w-0 text-xs rounded border-graphite/15 focus:border-terracotta focus:ring-terracotta">
-                                        <button type="submit" class="text-xs font-medium rounded-md border border-graphite/15 px-2 py-1.5 hover:bg-graphite/5 transition shrink-0">Salvar</button>
+                                        <label class="block text-[11px] font-semibold text-graphite/60 uppercase tracking-wide mb-1">Legenda desta foto</label>
+                                        <div class="flex items-center gap-1.5">
+                                            <input type="text" name="legenda" value="{{ $photo['legenda'] }}" placeholder="Ex: Decoração do salão principal"
+                                                   class="flex-1 min-w-0 text-sm rounded-md border-graphite/25 text-graphite focus:border-terracotta focus:ring-terracotta">
+                                            <button type="submit" class="text-xs font-medium rounded-md border border-graphite/25 px-2.5 py-2 hover:bg-white transition shrink-0">Salvar</button>
+                                        </div>
                                     </form>
                                 </div>
                             @empty
@@ -65,16 +68,24 @@
                             @endforelse
                         </div>
 
-                        <form method="POST" action="{{ route('galleries.store') }}" enctype="multipart/form-data" class="flex flex-wrap items-center gap-3">
+                        <form method="POST" action="{{ route('galleries.store') }}" enctype="multipart/form-data" class="rounded-lg bg-graphite/[0.03] border border-graphite/10 p-4">
                             @csrf
                             <input type="hidden" name="gallery_id" value="{{ $gallery['id'] }}">
-                            <input type="file" name="foto" accept="image/*" required
-                                   class="text-sm text-graphite/70 file:mr-3 file:rounded-md file:border-0 file:bg-graphite/5 file:px-3 file:py-2 file:text-xs file:font-medium hover:file:bg-graphite/10">
-                            <input type="text" name="legenda" placeholder="Legenda (opcional)"
-                                   class="text-sm rounded-md border-graphite/15 focus:border-terracotta focus:ring-terracotta flex-1 min-w-[160px]">
-                            <button type="submit" class="text-xs font-medium rounded-md bg-terracotta text-cream px-4 py-2 hover:bg-terracotta-dark transition">Adicionar foto</button>
+                            <div class="flex flex-wrap items-end gap-3">
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-graphite/60 uppercase tracking-wide mb-1">Foto</label>
+                                    <input type="file" name="foto" accept="image/*" required data-crop-aspect="16:9"
+                                           class="text-sm text-graphite/70 file:mr-3 file:rounded-md file:border-0 file:bg-graphite/10 file:px-3 file:py-2 file:text-xs file:font-medium hover:file:bg-graphite/20">
+                                </div>
+                                <div class="flex-1 min-w-[180px]">
+                                    <label class="block text-[11px] font-semibold text-graphite/60 uppercase tracking-wide mb-1">Legenda desta foto</label>
+                                    <input type="text" name="legenda" placeholder="Ex: Decoração do salão principal"
+                                           class="w-full text-sm rounded-md border-graphite/25 text-graphite focus:border-terracotta focus:ring-terracotta">
+                                </div>
+                                <button type="submit" class="text-xs font-medium rounded-md bg-terracotta text-cream px-4 py-2.5 hover:bg-terracotta-dark transition">Adicionar foto</button>
+                            </div>
+                            <p class="text-xs text-graphite/40 mt-2">📐 Ideal: foto horizontal (formato 16:9, ex: 1200×675px) com o assunto principal centralizado — assim ela não fica cortada no site.</p>
                         </form>
-                        <p class="text-xs text-graphite/40 mt-2">📐 Ideal: foto horizontal (formato 16:9, ex: 1200×675px) com o assunto principal centralizado — assim ela não fica cortada no site.</p>
                     </section>
                 @endforeach
             </div>

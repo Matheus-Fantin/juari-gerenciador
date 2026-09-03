@@ -31,10 +31,11 @@
 
                 <form method="POST" action="{{ route('site-images.update', $imagem['slot']) }}" enctype="multipart/form-data" class="flex flex-wrap items-center gap-3">
                     @csrf
-                    <input type="file" name="imagem" accept="image/*" required
+                    <input type="file" name="imagem" accept="image/*" required data-crop-aspect="{{ $imagem['proporcao'] ?? '16:9' }}"
                            class="text-xs text-graphite/70 file:mr-2 file:rounded-md file:border-0 file:bg-graphite/5 file:px-3 file:py-2 file:text-xs file:font-medium hover:file:bg-graphite/10 w-full">
                     <button type="submit" class="text-xs font-medium rounded-md bg-terracotta text-cream px-4 py-2 hover:bg-terracotta-dark transition">Trocar imagem</button>
                 </form>
+                <p class="text-[11px] text-graphite/40 mt-1.5">Ao escolher o arquivo, você poderá ajustar o corte antes de enviar.</p>
             </section>
         @endforeach
     </div>
