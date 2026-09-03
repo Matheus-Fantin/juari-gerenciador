@@ -16,8 +16,7 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
+            <x-password-input id="password" class="block mt-1 w-full"
                             name="password"
                             required autocomplete="current-password" />
 
@@ -43,5 +42,12 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+
+        @if (Route::has('register'))
+            <p class="mt-4 text-center text-sm text-gray-600">
+                {{ __('Ainda não tem uma conta?') }}
+                <a class="underline hover:text-gray-900" href="{{ route('register') }}">{{ __('Cadastre-se') }}</a>
+            </p>
+        @endif
     </form>
 </x-guest-layout>
