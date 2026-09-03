@@ -15,7 +15,7 @@ function buildModal() {
         <div class="bg-white rounded-xl w-full max-w-lg overflow-hidden shadow-xl">
             <div class="px-5 py-4 border-b border-graphite/10">
                 <h2 class="font-display font-bold text-base text-graphite">Ajustar o corte da foto</h2>
-                <p class="text-xs text-graphite/50 mt-0.5">Arraste a foto pra escolher o que aparece. Use a roda do mouse (ou pince na tela) pra dar zoom.</p>
+                <p class="text-xs text-graphite/50 mt-0.5">Arraste a foto pra reposicionar, ou arraste as bordas do quadro pra ajustar o quanto aparece. Use a roda do mouse (ou pince na tela) pra dar zoom.</p>
             </div>
             <div class="bg-graphite-light/10" style="max-height:60vh;overflow:hidden;">
                 <img class="crop-target block max-w-full">
@@ -70,10 +70,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     viewMode: 1,
                     dragMode: 'move',
                     autoCropArea: 1,
-                    cropBoxMovable: false,
-                    cropBoxResizable: false,
+                    cropBoxMovable: true,
+                    cropBoxResizable: true,
                     toggleDragModeOnDblclick: false,
                     background: false,
+                    zoom(event) {
+                        // Não deixa ampliar além do tamanho real da foto (evita ficar borrada/pixelada).
+                        if (event.detail.ratio > 1) {
+                            event.preventDefault();
+                        }
+                    },
                 });
             };
             leitor.readAsDataURL(file);
@@ -88,7 +94,10 @@ document.addEventListener('DOMContentLoaded', function () {
     btnUsar.addEventListener('click', function () {
         if (!cropper || !inputAtivo) return;
 
-        cropper.getCroppedCanvas().toBlob(function (blob) {
+        cropper.getCroppedCanvas({
+            imageSmoothingEnabled: true,
+            imageSmoothingQuality: 'high',
+        }).toBlob(function (blob) {
             const arquivoCortado = new File([blob], nomeArquivoOriginal, { type: 'image/jpeg' });
             const dt = new DataTransfer();
             dt.items.add(arquivoCortado);
