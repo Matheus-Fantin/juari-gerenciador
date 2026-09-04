@@ -30,9 +30,18 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $permitidos = config('app.admin_allowed_emails');
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => [
+                'required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class,
+                function (string $attribute, mixed $value, \Closure $fail) use ($permitidos): void {
+                    if ($permitidos && ! in_array(strtolower($value), $permitidos, true)) {
+                        $fail('Esse e-mail não está autorizado a criar uma conta neste painel. Fale com o administrador.');
+                    }
+                },
+            ],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 

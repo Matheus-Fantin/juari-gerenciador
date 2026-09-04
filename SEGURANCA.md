@@ -7,6 +7,7 @@
 - **Limite de tentativas de login** (5 erradas = bloqueio temporário).
 - **Cabeçalhos de proteção do navegador** (clickjacking, MIME sniffing) em todas as respostas.
 - **Cadastro público desligável**: `ALLOW_REGISTRATION=false` no `.env` remove a rota `/register` inteira.
+- **Lista de e-mails autorizados**: `ADMIN_ALLOWED_EMAILS` no `.env` (separados por vírgula) restringe quem consegue criar conta ou continuar logado — qualquer e-mail fora da lista é bloqueado na hora, mesmo com uma sessão já aberta. Deixe em branco pra não restringir ninguém.
 - **Upload de foto restrito** a jpg/png/webp, até 8MB.
 
 ## Antes de colocar no ar
@@ -15,6 +16,7 @@
 - [ ] `APP_ENV=production`
 - [ ] HTTPS ativo + `SESSION_SECURE_COOKIE=true`
 - [ ] `ALLOW_REGISTRATION=false` assim que as contas da equipe estiverem criadas.
+- [ ] `ADMIN_ALLOWED_EMAILS` preenchido com os e-mails de quem deve ter acesso.
 - [ ] `JUARI_SITE_API_TOKEN` gerado com `Str::random(64)` (ou maior) — nunca um valor curto ou previsível.
 - [ ] O token nunca deve aparecer em prints de tela, mensagens ou repositório público.
 

@@ -30,6 +30,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | E-mails autorizados a usar o painel
+    |--------------------------------------------------------------------------
+    |
+    | Lista separada por vírgula (ex: "ana@juari.com,bruno@juari.com"). Se
+    | vazia, qualquer conta criada tem acesso normalmente (comportamento
+    | padrão). Se preenchida, só quem estiver nessa lista consegue criar
+    | conta ou continuar logado — qualquer outro e-mail é bloqueado, mesmo
+    | que já tenha uma sessão ativa.
+    |
+    */
+
+    'admin_allowed_emails' => array_values(array_filter(array_map(
+        fn ($email) => strtolower(trim($email)),
+        explode(',', (string) env('ADMIN_ALLOWED_EMAILS', ''))
+    ))),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |
