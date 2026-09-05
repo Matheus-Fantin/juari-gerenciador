@@ -5,6 +5,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteImageController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\VisitsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,6 +28,8 @@ Route::middleware(['auth', 'verified', 'email.permitido'])->group(function () {
 
     Route::get('/imagens-do-site', [SiteImageController::class, 'index'])->name('site-images.index');
     Route::post('/imagens-do-site/{slot}', [SiteImageController::class, 'update'])->name('site-images.update');
+
+    Route::get('/visitas', [VisitsController::class, 'index'])->name('visits.index');
 });
 
 Route::middleware(['auth', 'email.permitido'])->group(function () {

@@ -32,5 +32,12 @@
             <h2 class="font-display font-bold text-lg text-graphite mb-1">Trocar as capas do site</h2>
             <p class="text-sm text-graphite/60">Capa da home, da galeria e as fotos da página Sobre.</p>
         </a>
+
+        <a href="{{ route('visits.index') }}"
+           class="rounded-xl border border-graphite/10 bg-white p-6 hover:border-terracotta hover:shadow-sm transition">
+            <p class="font-sans font-semibold text-xs tracking-[3px] text-terracotta uppercase mb-2">Visitas</p>
+            <h2 class="font-display font-bold text-lg text-graphite mb-1">Visualizações e mapa de calor</h2>
+            <p class="text-sm text-graphite/60">{{ $visitasHoje }} visita(s) hoje no site.</p>
+        </a>
     </div>
 </x-app-layout>

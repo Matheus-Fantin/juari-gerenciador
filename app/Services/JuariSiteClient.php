@@ -94,6 +94,11 @@ class JuariSiteClient
         return $response->throw()->json('data', []);
     }
 
+    public function pageViews(): array
+    {
+        return $this->http()->get('/page-views')->throw()->json('data', []);
+    }
+
     /**
      * Verifica se a API do site está acessível e o token é válido.
      */

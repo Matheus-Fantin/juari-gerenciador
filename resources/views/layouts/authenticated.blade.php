@@ -30,6 +30,7 @@
                 <li><a href="{{ route('testimonials.index') }}" class="hover:text-cream transition {{ request()->routeIs('testimonials.*') ? 'text-cream font-medium' : '' }}">Depoimentos</a></li>
                 <li><a href="{{ route('galleries.index') }}" class="hover:text-cream transition {{ request()->routeIs('galleries.*') ? 'text-cream font-medium' : '' }}">Galeria</a></li>
                 <li><a href="{{ route('site-images.index') }}" class="hover:text-cream transition {{ request()->routeIs('site-images.*') ? 'text-cream font-medium' : '' }}">Imagens do site</a></li>
+                <li><a href="{{ route('visits.index') }}" class="hover:text-cream transition {{ request()->routeIs('visits.*') ? 'text-cream font-medium' : '' }}">Visitas</a></li>
                 @if (config('services.juari_site.public_url'))
                     <li><a href="{{ config('services.juari_site.public_url') }}" target="_blank" rel="noopener" class="hover:text-cream transition">Ver site ↗</a></li>
                 @endif
@@ -60,6 +61,7 @@
                 <li><a href="{{ route('testimonials.index') }}" @click="menuAberto = false" class="block py-2.5 {{ request()->routeIs('testimonials.*') ? 'text-cream font-medium' : '' }}">Depoimentos</a></li>
                 <li><a href="{{ route('galleries.index') }}" @click="menuAberto = false" class="block py-2.5 {{ request()->routeIs('galleries.*') ? 'text-cream font-medium' : '' }}">Galeria</a></li>
                 <li><a href="{{ route('site-images.index') }}" @click="menuAberto = false" class="block py-2.5 {{ request()->routeIs('site-images.*') ? 'text-cream font-medium' : '' }}">Imagens do site</a></li>
+                <li><a href="{{ route('visits.index') }}" @click="menuAberto = false" class="block py-2.5 {{ request()->routeIs('visits.*') ? 'text-cream font-medium' : '' }}">Visitas</a></li>
                 @if (config('services.juari_site.public_url'))
                     <li><a href="{{ config('services.juari_site.public_url') }}" target="_blank" rel="noopener" class="block py-2.5">Ver site ↗</a></li>
                 @endif

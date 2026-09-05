@@ -12,6 +12,7 @@ class DashboardController extends Controller
         $conectado = $client->isReachable();
         $pendentes = 0;
         $totalFotos = 0;
+        $visitasHoje = 0;
 
         if ($conectado) {
             $depoimentos = $client->testimonials();
@@ -19,12 +20,15 @@ class DashboardController extends Controller
 
             $galerias = $client->galleries();
             $totalFotos = collect($galerias)->sum(fn ($g) => count($g['photos'] ?? []));
+
+            $visitasHoje = $client->pageViews()['hoje'] ?? 0;
         }
 
         return view('dashboard', [
             'conectado' => $conectado,
             'pendentes' => $pendentes,
             'totalFotos' => $totalFotos,
+            'visitasHoje' => $visitasHoje,
         ]);
     }
 }
