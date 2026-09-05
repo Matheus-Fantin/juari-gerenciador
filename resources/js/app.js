@@ -1,5 +1,6 @@
 import './bootstrap';
 import './crop';
+import './loading';
 
 import Alpine from 'alpinejs';
 
